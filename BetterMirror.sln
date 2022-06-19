@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32516.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterMirror", "BetterMirror\BetterMirror.csproj", "{90925D1B-BD2B-448E-AB30-0CFE27A9B959}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90925D1B-BD2B-448E-AB30-0CFE27A9B959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90925D1B-BD2B-448E-AB30-0CFE27A9B959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90925D1B-BD2B-448E-AB30-0CFE27A9B959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90925D1B-BD2B-448E-AB30-0CFE27A9B959}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CEB43687-CD39-4A3D-B611-E714266DB8C3}
+	EndGlobalSection
+EndGlobal
