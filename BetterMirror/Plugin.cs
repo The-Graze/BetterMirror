@@ -22,11 +22,15 @@ namespace BetterMirror
 
             HarmonyPatches.ApplyHarmonyPatches();
             Utilla.Events.GameInitialized += OnGameInitialized;
+            GameObject.Find("Level/city/CosmeticsRoomAnchor/ShoppingCenterAnchor/mirrors2 (1)/").SetActive(false);
+            GameObject.Find("Level/city/CosmeticsRoomAnchor/bm(Clone").SetActive(true);
         }
         void OnDisable()
         {
             HarmonyPatches.RemoveHarmonyPatches();
             Utilla.Events.GameInitialized -= OnGameInitialized;
+            GameObject.Find("Level/city/CosmeticsRoomAnchor/ShoppingCenterAnchor/mirrors2 (1)/").SetActive(true);
+            GameObject.Find("Level/city/CosmeticsRoomAnchor/bm(Clone").SetActive(false);
         }
 
         void OnGameInitialized(object sender, EventArgs e)
@@ -35,7 +39,7 @@ namespace BetterMirror
             AssetBundle bundle = AssetBundle.LoadFromStream(str);
             GameObject mirror = Instantiate(bundle.LoadAsset<GameObject>("bm"));
             GameObject.Find("Level/city/CosmeticsRoomAnchor/ShoppingCenterAnchor/mirrors2 (1)/ShoppingCart/").transform.SetParent(GameObject.Find("bm(Clone)").transform, false);
-            Destroy(GameObject.Find("Level/city/CosmeticsRoomAnchor/ShoppingCenterAnchor/mirrors2 (1)/"));
+            GameObject.Find("Level/city/CosmeticsRoomAnchor/ShoppingCenterAnchor/mirrors2 (1)/").SetActive(false);
             GameObject.Find("bm(Clone)").transform.SetParent(GameObject.Find("Level/city/CosmeticsRoomAnchor/").transform, true);
         }
 
