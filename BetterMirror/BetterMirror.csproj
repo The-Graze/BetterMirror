@@ -11,16 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Assets\bm" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Assets\bm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>$(BepInExAssemblyPath)\0Harmony.dll</HintPath>
     </Reference>
