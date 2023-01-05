@@ -1,49 +1,33 @@
 ﻿using BepInEx;
 using System;
-using System.IO;
-using System.Reflection;
 using UnityEngine;
 using Utilla;
+using System.Collections;
 
 namespace BetterMirror
 {
-    [ModdedGamemode]
-    [BepInDependency("org.legoandmars.gorillatag.utilla", "1.6.4")]
     [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
     public class Plugin : BaseUnityPlugin
     {
-        bool inRoom;
-        public GameObject bm;
-
-        void OnEnable()
+        public RenderTexture bm;
+        bool set;
+        void Start()
         {
-            /* Set up your mod here */
-            /* Code here runs at the start and whenever your mod is enabled*/
-
-            HarmonyPatches.ApplyHarmonyPatches();
-            Utilla.Events.GameInitialized += OnGameInitialized;
-            GameObject.Find("Level/city/CosmeticsRoomAnchor/ShoppingCenterAnchor/mirrors2 (1)/").SetActive(false);
-            GameObject.Find("Level/city/CosmeticsRoomAnchor/bm(Clone").SetActive(true);
+            bm = new RenderTexture(2000, 2000, 24, RenderTextureFormat.Default);
+            bm.Create();
+            bm.filterMode = FilterMode.Point;
+            bm.antiAliasing = 3;
+            set = false;
         }
-        void OnDisable()
+        void Update()
         {
-            HarmonyPatches.RemoveHarmonyPatches();
-            Utilla.Events.GameInitialized -= OnGameInitialized;
-            GameObject.Find("Level/city/CosmeticsRoomAnchor/ShoppingCenterAnchor/mirrors2 (1)/").SetActive(true);
-            GameObject.Find("Level/city/CosmeticsRoomAnchor/bm(Clone").SetActive(false);
+            if (set == false &&GameObject.Find("Level/city").activeSelf == true || GameObject.Find("Level/city") != null)
+            {
+                GameObject.Find("mirrors2 (1)").GetComponent<Renderer>().materials[1].mainTexture = bm;
+                GameObject.Find("CameraC").GetComponent<Camera>().targetTexture = bm;
+                set= true;
+            }
+            else{}
         }
-
-        void OnGameInitialized(object sender, EventArgs e)
-        {
-            Stream str = Assembly.GetExecutingAssembly().GetManifestResourceStream("BetterMirror.Assets.bm");
-            AssetBundle bundle = AssetBundle.LoadFromStream(str);
-            GameObject mirror = Instantiate(bundle.LoadAsset<GameObject>("bm"));
-            GameObject.Find("Level/city/CosmeticsRoomAnchor/ShoppingCenterAnchor/mirrors2 (1)/ShoppingCart/").transform.SetParent(GameObject.Find("bm(Clone)").transform, false);
-            GameObject.Find("Level/city/CosmeticsRoomAnchor/ShoppingCenterAnchor/mirrors2 (1)/").SetActive(false);
-            GameObject.Find("bm(Clone)").transform.SetParent(GameObject.Find("Level/city/CosmeticsRoomAnchor/").transform, true);
-        }
-
     }
-
-
 }
