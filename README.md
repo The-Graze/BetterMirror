@@ -1,5 +1,6 @@
 # BetterMirror
 
 Makes the Main City Mirror Higher Resilution for better screenshots or for videos.
-![image](https://user-images.githubusercontent.com/82724623/174472585-b84d367a-0496-4bb2-bfc5-07f90924005f.png)
+
+![image](https://github.com/The-Graze/BetterMirror/assets/82724623/1be32581-b78d-488e-ae5b-421ad15e7102)
 
