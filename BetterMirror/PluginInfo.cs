@@ -7,6 +7,6 @@
     {
         public const string GUID = "com.graze.gorillatag.bettermirror";
         public const string Name = "BetterMirror";
-        public const string Version = "1.0.0";
+        public const string Version = "2.0";
     }
 }
