@@ -26,11 +26,11 @@ namespace BetterMirror
             bm.Create();
             bm.filterMode = FilterMode.Point;
             bm.antiAliasing = 3;
-            GameObject.Find("Level").AddComponent<LayerChanger>();
+            GameObject.Find("LocalObjects_Prefab").AddComponent<LayerChanger>();
         }
         void Update()
         {
-            if (set == false &&GameObject.Find("Level/city").activeSelf == true || GameObject.Find("Level/city") != null)
+            if (set == false && GameObject.Find("LocalObjects_Prefab/City").activeSelf == true || GameObject.Find("LocalObjects_Prefab/City") != null)
             {
                 GameObject.Find("mirrors2 (1)").GetComponent<Renderer>().materials[1].mainTexture = bm;
                 GameObject.Find("CameraC").GetComponent<Camera>().targetTexture = bm;
@@ -48,7 +48,6 @@ namespace BetterMirror
     {
         void Start()
         {
-            Invoke("aDestory", 5);
             if (gameObject.layer == LayerMask.NameToLayer("NoMirror"))
             {
                 gameObject.layer = 0;
@@ -60,7 +59,7 @@ namespace BetterMirror
             }
             if (gameObject.name == "CameraC")
             {
-                Plugin.Instance.cull = GetComponent<Camera>().cullingMask;
+                Plugin.Instance.cull = gameObject.GetComponent<Camera>().cullingMask;
                 GetComponent<Camera>().farClipPlane = 35;
                 Destroy(this);
             }
@@ -69,10 +68,6 @@ namespace BetterMirror
                 t.gameObject.AddComponent<LayerChanger>();
                 Destroy(this);
             }
-            Destroy(this);
-        }
-        void aDestory()
-        {
             Destroy(this);
         }
     }
