@@ -12,7 +12,6 @@ namespace BetterMirror
     public class Plugin : BaseUnityPlugin
     {
         public RenderTexture bm;
-        bool set;
         public static volatile Plugin Instance;
         public int cull;
         void Start()
@@ -27,23 +26,42 @@ namespace BetterMirror
             bm.filterMode = FilterMode.Point;
             bm.antiAliasing = 3;
             GameObject.Find("LocalObjects_Prefab").AddComponent<LayerChanger>();
+            gameObject.AddComponent<CamChange>();
         }
         void Update()
         {
-            if (set == false && GameObject.Find("LocalObjects_Prefab/City").activeSelf == true || GameObject.Find("LocalObjects_Prefab/City") != null)
+            if(cull == 0) 
             {
+                GameObject.Find("Environment Objects/LocalObjects_Prefab").transform.GetChild(3).gameObject.SetActive(true);
+
                 GameObject.Find("mirrors2 (1)").GetComponent<Renderer>().materials[1].mainTexture = bm;
                 GameObject.Find("CameraC").GetComponent<Camera>().targetTexture = bm;
-                set = true;
             }
-            if (set == true && cull != 0)
+            else
             {
-                Camera ca = GameObject.Find("Shoulder Camera").GetComponent<Camera>();
-                ca.cullingMask = cull;
+                gameObject.GetComponent<CamChange>().cull = cull;
                 Destroy(this);
             }
         }
     }
+    class CamChange : MonoBehaviour
+    {
+        public int cull;
+        void Update()
+        {
+            if (cull != 0)
+            {
+                foreach (Camera c in Camera.allCameras)
+                {
+                    if (c != Camera.main && c.cullingMask != cull)
+                    {
+                        c.cullingMask = cull;
+                    }
+                }
+            }
+        }
+    }
+
     public class LayerChanger : MonoBehaviour
     {
         void Start()
