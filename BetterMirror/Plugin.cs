@@ -23,7 +23,7 @@ namespace BetterMirror
             bm.filterMode = FilterMode.Point;
             bm.antiAliasing = 3;
             bm.Create();
-            GameObject.Find("LocalObjects_Prefab").AddComponent<LayerChanger>();
+            GameObject.Find("Environment Objects/LocalObjects_Prefab").transform.GetChild(3).gameObject.AddComponent<LayerChanger>();
 
             int mirrorOnlyMask = 1 << LayerMask.NameToLayer("MirrorOnly");
             int noMirrorMask = 1 << LayerMask.NameToLayer("NoMirror");
@@ -39,12 +39,12 @@ namespace BetterMirror
                 {
                     GameObject.Find("mirrors2 (1)").GetComponent<Renderer>().materials[1].mainTexture = bm;
                     GameObject.Find("CameraC").GetComponent<Camera>().targetTexture = bm;
-                    GameObject.Find("Environment Objects/LocalObjects_Prefab/mirrors2 (1)").transform.GetChild(3).gameObject.SetActive(false);
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab").transform.GetChild(3).gameObject.SetActive(false);
                     ran = true;
                 }
                 catch
                 {
-                    GameObject.Find("Environment Objects/LocalObjects_Prefab/mirrors2 (1)").transform.GetChild(3).gameObject.SetActive(true);
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab").transform.GetChild(3).gameObject.SetActive(true);
                 }
             }
         }
