@@ -58,15 +58,15 @@ namespace BetterMirror
             {
                 gameObject.layer = 0;
             }
-            if (gameObject.name == "Mirror Backdrop")
+            else if (gameObject.name == "Mirror Backdrop")
             {
                 Destroy(gameObject);
             }
-            if (gameObject.name == "CameraC")
+            else if (gameObject.name == "CameraC")
             {
                 GetComponent<Camera>().farClipPlane = 35;
             }
-            foreach (Transform t in gameObject.transform)
+            foreach (Transform t in transform)
             {
                 t.gameObject.AddComponent<LayerChanger>();
             }
