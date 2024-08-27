@@ -11,7 +11,7 @@
       <HintPath>$(BepInExAssemblyPath)\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="Oculus.VR">
-      <HintPath>$(GameAssemblyPath)\Managed\Oculus.VR.dll</HintPath>
+      <HintPath>$(GameAssemblyPath)\Oculus.VR.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>$(GameAssemblyPath)\UnityEngine.dll</HintPath>
