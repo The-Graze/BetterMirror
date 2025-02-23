@@ -1,4 +1,5 @@
-﻿using BepInEx;
+﻿using System.Threading.Tasks;
+using BepInEx;
 using UnityEngine;
 
 namespace BetterMirror
@@ -22,8 +23,22 @@ namespace BetterMirror
             MirrorCam = Mirror.transform.GetComponentInChildren<Camera>();
             MirrorCam.farClipPlane = 35;
             MirrorCam.targetTexture.filterMode = FilterMode.Point;
-            MirrorCam.targetTexture.width = MirrorCam.targetTexture.width * 10;
-            MirrorCam.targetTexture.height = MirrorCam.targetTexture.height * 10;
+            MirrorCam.targetTexture.width = MirrorCam.targetTexture.width * 5;
+            MirrorCam.targetTexture.height = MirrorCam.targetTexture.height * 5;
+
+            SetLayers(city.transform);
+        }
+
+        void SetLayers(Transform t)
+        {
+            if (t.gameObject.layer == LayerMask.NameToLayer("NoMirror"))
+            {
+                t.gameObject.layer = 0;
+            }
+            foreach (Transform tr in t)
+            {
+                SetLayers(tr);
+            }
         }
     }
 }
