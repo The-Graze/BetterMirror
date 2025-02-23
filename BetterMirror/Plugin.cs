@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using BepInEx;
+using System.Collections;
 using UnityEngine;
 
 namespace BetterMirror
@@ -9,18 +10,18 @@ namespace BetterMirror
     {
         bool ran;
         Camera MirrorCam;
-        GameObject Mirror;
+        Transform Mirror;
         void Start()
         {
             GorillaTagger.OnPlayerSpawned(OnGameInitialized);
         }
         void OnGameInitialized()
         {
-            GameObject city = GameObject.Find("Environment Objects/LocalObjects_Prefab").transform.FindChildRecursive("City_WorkingPrefab").gameObject;
-            Mirror = city.transform.FindChildRecursive("DressingRoom_Mirrors_Prefab").gameObject;
+            Transform city = GameObject.Find("Environment Objects/LocalObjects_Prefab").transform.FindChildRecursive("City_WorkingPrefab");
+            Mirror = city.FindChildRecursive("DressingRoom_Mirrors_Prefab");
 
-            Mirror.transform.GetChild(1).gameObject.SetActive(false);
-            MirrorCam = Mirror.transform.GetComponentInChildren<Camera>();
+            Mirror.GetChild(1).gameObject.SetActive(false);
+            MirrorCam = Mirror.GetComponentInChildren<Camera>();
             MirrorCam.farClipPlane = 35;
             MirrorCam.targetTexture.filterMode = FilterMode.Point;
             MirrorCam.targetTexture.width = MirrorCam.targetTexture.width * 5;
