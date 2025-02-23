@@ -4,6 +4,6 @@
     {
         public const string GUID = "graze.bettermirror";
         public const string Name = "BetterMirror";
-        public const string Version = "3.1";
+        public const string Version = "3.2";
     }
 }
