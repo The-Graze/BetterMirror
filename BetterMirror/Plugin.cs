@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using BepInEx;
-using System.Collections;
+﻿using BepInEx;
 using BepInEx.Configuration;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,7 +14,7 @@ namespace BetterMirror
         private static ConfigEntry<int> _quality;
         
         private Plugin() =>
-            _quality = Config.Bind("Settings", "Mirror Quality Multiplier", 5, "Times' the mirror quality by this number");
+            _quality = Config.Bind("Settings", "Mirror Quality Multiplier", 4, "Times' the mirror quality by this number");
         
         private void Start() => SceneManager.sceneLoaded += CityLoadedCheck;
         
@@ -30,6 +28,9 @@ namespace BetterMirror
             _mirrorCam = _mirror.GetComponentInChildren<Camera>();
             _mirrorCam.farClipPlane = 35;
             _mirrorCam.targetTexture.filterMode = FilterMode.Point;
+
+            _quality.Value = Mathf.Clamp(_quality.Value, 1, 4);
+            
             _mirrorCam.targetTexture.width *= _quality.Value;
             _mirrorCam.targetTexture.height *= _quality.Value;
             

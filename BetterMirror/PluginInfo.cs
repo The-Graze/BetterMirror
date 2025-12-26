@@ -1,9 +1,9 @@
 ﻿namespace BetterMirror
 {
-    internal class PluginInfo
+    internal abstract class PluginInfo
     {
-        public const string GUID = "graze.bettermirror";
+        public const string Guid = "graze.bettermirror";
         public const string Name = "BetterMirror";
-        public const string Version = "3.2";
+        public const string Version = "3.3";
     }
 }
