@@ -9,13 +9,22 @@ namespace BetterMirror
     public class Plugin : BaseUnityPlugin
     {
         private static ConfigEntry<int> _quality;
+        private bool _firstRun;
         private Transform _mirror;
         private Camera _mirrorCam;
+        private int _qualityCache;
 
         private Plugin()
         {
-            _quality = Config.Bind("Settings", "Mirror Quality Multiplier", 4,
-                "Times' the mirror quality by this number");
+            var qualityDescription = new ConfigDescription(
+                "Times' the mirror quality by this number",
+                new AcceptableValueList<int>(1,2,3,4)
+            );
+            _quality = Config.Bind("Settings",
+                "Mirror Quality Multiplier",
+                4,
+                qualityDescription
+            );
         }
 
         private void Start() =>
@@ -34,8 +43,18 @@ namespace BetterMirror
 
             _quality.Value = Mathf.Clamp(_quality.Value, 1, 4);
 
-            _mirrorCam.targetTexture.width *= _quality.Value;
-            _mirrorCam.targetTexture.height *= _quality.Value;
+            if (!_firstRun)
+            {
+                _mirrorCam.targetTexture.width *= _quality.Value;
+                _mirrorCam.targetTexture.height *= _quality.Value;
+                _qualityCache = _mirrorCam.targetTexture.height;
+                _firstRun = true;
+            }
+            else
+            {
+                _mirrorCam.targetTexture.width = _qualityCache;
+                _mirrorCam.targetTexture.height = _qualityCache;
+            }
 
             SetLayers(city.transform);
         }
